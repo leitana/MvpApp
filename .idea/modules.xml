@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MvpApp.iml" filepath="$PROJECT_DIR$/MvpApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SharedPreferences_lib/SharedPreferences_lib.iml" filepath="$PROJECT_DIR$/SharedPreferences_lib/SharedPreferences_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MvpApp</string>
+    <string name="navigation_movie">电影</string>
+    <string name="navigation_book">书籍</string>
+    <string name="navigation_music">音乐</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
 </resources>

@@ -18,13 +18,18 @@
         android:supportsRtl="true"
         android:name=".MyApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".other.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".viewimpl.film.FilmDetailActivity"/>
+        <activity android:name=".other.WebviewActivity"/>
+        <activity android:name=".viewimpl.music.MusicDetailActivity"/>
+        <activity android:name=".viewimpl.book.BookDetailActivity"/>
     </application>
 
 </manifest>

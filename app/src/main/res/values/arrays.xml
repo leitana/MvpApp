@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tab_film">
+        <item>热映榜</item>
+        <item>Top250</item>
+    </string-array>
+
+    <string-array name="tab_book">
+        <item>综合</item>
+        <item>文学</item>
+        <item>流行</item>
+        <item>文化</item>
+        <item>生活</item>
+    </string-array>
+
+    <string-array name="tab_music">
+        <item>流行</item>
+        <item>经典</item>
+        <item>韩系</item>
+        <item>欧美</item>
+    </string-array>
+</resources>
