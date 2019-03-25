@@ -6,6 +6,7 @@ import com.lx.mvpapp.base.BasePresenter;
 import com.lx.mvpapp.entity.filmdetail.FilmDetail;
 import com.lx.mvpapp.entity.filmlive.FilmLive;
 import com.lx.mvpapp.entity.top250.Root;
+import com.lx.mvpapp.server.RxSchedulerHelper;
 import com.lx.mvpapp.viewinterface.film.IgetLiveView;
 import com.lx.mvpapp.viewinterface.film.IgetTop250View;
 import com.lx.mvpapp.viewinterface.film.IgetFilmDetail;
@@ -73,8 +74,7 @@ public class DoubanFilmPresenter extends BasePresenter{
 
     public void getFilmDetail(final IgetFilmDetail igetFilmDetail, String id){
         doubanApi.getFilmDetail(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxSchedulerHelper.<FilmDetail>io_main())
                 .subscribe(new Action1<FilmDetail>() {
                     @Override
                     public void call(FilmDetail filmDetail) {
@@ -87,4 +87,5 @@ public class DoubanFilmPresenter extends BasePresenter{
                     }
                 });
     }
+
 }

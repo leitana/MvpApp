@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
@@ -13,6 +14,7 @@ import com.lx.mvpapp.MainActivity;
 import com.lx.mvpapp.R;
 import com.lx.mvpapp.base.BaseActivity;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
@@ -34,6 +36,27 @@ public class WelcomeActivity extends BaseActivity {
 
     private static final float SCALE_END = 1.13F;
 
+    private static final int[] IMAGES = {
+            R.drawable.ic_screen_default,
+            R.drawable.splash0,
+            R.drawable.splash1,
+            R.drawable.splash2,
+            R.drawable.splash3,
+            R.drawable.splash4,
+            R.drawable.splash5,
+            R.drawable.splash6,
+            R.drawable.splash7,
+            R.drawable.splash8,
+            R.drawable.splash9,
+            R.drawable.splash10,
+            R.drawable.splash11,
+            R.drawable.splash12,
+            R.drawable.splash13,
+            R.drawable.splash14,
+            R.drawable.splash15,
+            R.drawable.splash16,
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +64,8 @@ public class WelcomeActivity extends BaseActivity {
         ButterKnife.bind(this);
         setTranslucentStatus(true);
 
-        image.setImageResource(R.drawable.splash2);
+        Random random = new Random(SystemClock.elapsedRealtime());
+        image.setImageResource(IMAGES[random.nextInt(IMAGES.length)]);
 
         Observable.timer(1000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())

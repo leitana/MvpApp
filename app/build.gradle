@@ -10,12 +10,59 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            keyAlias 'key'
+            keyPassword 'boco123'
+            storeFile file('/Users/linxiao/Sourcetree/keystore')
+            storePassword 'boco123'
+        }
+        debug {
+            keyAlias 'key'
+            keyPassword 'boco123'
+            storeFile file('/Users/linxiao/Sourcetree/keystore')
+            storePassword 'boco123'
         }
     }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            /**
+             * getDefaultProguardFile(‘proguard-android.txt’)
+             * 方法可从 Android SDK tools/proguard/ 文件夹获取默认的 ProGuard 设置。
+             * 要想做进一步的代码压缩，请尝试使用位于同一位置的 proguard-android-optimize.txt 文件。
+             * 它包括相同的 ProGuard 规则，但还包括其他在字节码一级（方法内和方法间）执行分析的优化，
+             * 以进一步减小 APK 大小和帮助提高其运行速度。
+             *
+             * proguard-rules.pro 文件用于添加自定义 ProGuard 规则。
+             * 默认情况下，该文件位于模块根目录（build.gradle 文件旁），内容为空。
+             */
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // app/build/source/BuildConfig/Build Varients/package name/BuildConfig
+            // 目录下自动生成BuildConfig.LOG_DEBUG
+            //相当于定义一个变量，该字段编译后自动生成
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            signingConfig signingConfigs.debug
+        }
+        release {
+            //混淆
+            minifyEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            //Zipalign优化
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // app/.../buidlConfig目录下 分别自动生成BuildConfig.LOG_DEBUG
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            signingConfig signingConfigs.release
+        }
+    }
+
 }
 
 dependencies {
@@ -27,21 +74,17 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     compile 'com.google.dagger:dagger:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     compile 'com.google.dagger:dagger-android:2.11'
     compile 'com.google.dagger:dagger-android-support:2.11'
     // if you use the support libraries
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
-
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
-
     compile 'io.reactivex:rxjava:1.2.3'
     compile 'io.reactivex:rxandroid:1.2.1'
-
     compile 'com.github.orhanobut:logger:1.12'
     compile project(':SharedPreferences_lib')
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
@@ -49,6 +92,5 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
-
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
 }
